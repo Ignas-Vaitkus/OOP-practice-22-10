@@ -59,7 +59,7 @@ class Basket
         }
 
         usort(self::$fruits, function ($fruit1, $fruit2) {
-            return $fruit1->getSize() > $fruit2->getSize();
+            return $fruit1->getSize() < $fruit2->getSize();
         });
     }
 
@@ -82,12 +82,15 @@ class Basket
 
 Basket::fill();
 
+// var_dump(Basket::getFruit());
+// print(PHP_EOL);
+
 for ($i = 0; $i < 3; $i++) {
     Basket::takeOut($cores);
 }
 
-var_dump($cores);
-print(PHP_EOL);
+// var_dump($cores);
+// print(PHP_EOL);
 
-var_dump(Basket::getFruit());
-print(PHP_EOL);
+// var_dump(Basket::getFruit());
+// print(PHP_EOL);
