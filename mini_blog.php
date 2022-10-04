@@ -9,13 +9,16 @@ $conn = mysqli_connect($hostname, $username, $password, $dbname);
 if (!$conn)
     die("Connection failed: " . mysqli_connect_error());
 
-$sql = "SELECT * FROM blog_database.posts;";
+require_once('posts.php');
 
-$result = mysqli_query($conn, $sql);
+$result = Posts::getPosts($conn);
+
+mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='lt'>
 
 <head>
     <meta charset='UTF-8'>
@@ -24,7 +27,15 @@ $result = mysqli_query($conn, $sql);
 </head>
 
 <body>
+    <?php
 
+    while ($row = mysqli_fetch_assoc($result)) {
+        print('<pre>');
+        var_dump($row);
+        print('</pre>');
+    }
+
+    ?>
 </body>
 
 </html>
