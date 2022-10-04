@@ -10,8 +10,8 @@ image VARCHAR(255),
 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=Innodb;
 
-DROP USER IF EXISTS  'blog_viewer'@'localhost';
+DROP USER IF EXISTS  'blog_user'@'localhost';
     
-CREATE USER 'blog_viewer'@'localhost' IDENTIFIED BY 'mysql';
+CREATE USER 'blog_user'@'localhost' IDENTIFIED BY 'mysql';
 
-GRANT SELECT ON blog_database.posts TO 'crud_user'@'localhost';
+GRANT SELECT, DELETE, INSERT, UPDATE ON blog_database.posts TO 'crud_user'@'localhost';
