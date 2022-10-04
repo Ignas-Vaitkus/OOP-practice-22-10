@@ -10,27 +10,36 @@ class Posts
     public static function getPost(mysqli $conn, int $id): mysqli_result
     {
         $sql = "SELECT * FROM blog_database.posts WHERE id = $id;";
+
         return mysqli_query($conn, $sql);
     }
-    public static function getPostTitle(mysqli $conn, int $id): mysqli_result
+    public static function getPostTitle(mysqli $conn, int $id): string
     {
         $sql = "SELECT title FROM blog_database.posts WHERE id = $id;";
-        return mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['title'];
     }
-    public static function getPostContent(mysqli $conn, int $id): mysqli_result
+    public static function getPostContent(mysqli $conn, int $id): string
     {
         $sql = "SELECT content FROM blog_database.posts WHERE id = $id;";
-        return mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['content'];
     }
-    public static function getPostImage(mysqli $conn, int $id): mysqli_result
+    public static function getPostImage(mysqli $conn, int $id): string
     {
         $sql = "SELECT image FROM blog_database.posts WHERE id = $id;";
-        return mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['image'];
     }
-    public static function getPostDate(mysqli $conn, int $id): mysqli_result
+    public static function getPostDate(mysqli $conn, int $id): string
     {
         $sql = "SELECT createdAt FROM blog_database.posts WHERE id = $id;";
-        return mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['createdAt'];
     }
     public static function createPost(mysqli $conn, string $title, string $content, string $image = null)
     {

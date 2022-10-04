@@ -11,7 +11,7 @@ if (!$conn)
 
 require_once('./Modules/posts.php');
 
-$result = Posts::getPosts($conn);
+$result = Posts::getPostTitle($conn, 3);
 
 mysqli_close($conn);
 
@@ -29,11 +29,13 @@ mysqli_close($conn);
 <body>
     <?php
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        print('<pre>');
-        var_dump($row);
-        print('</pre>');
-    }
+    // while ($row = mysqli_fetch_assoc($result)) {
+    //     print('<pre>');
+    //     var_dump($row);
+    //     print('</pre>');
+    // }
+
+    print($result);
 
     ?>
 </body>
