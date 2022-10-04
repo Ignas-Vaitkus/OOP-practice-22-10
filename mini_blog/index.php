@@ -11,7 +11,11 @@ if (!$conn)
 
 require_once('./Modules/posts.php');
 
-$result = Posts::getPostTitle($conn, 3);
+$result = Posts::getPosts($conn);
+
+// Posts::createPost($conn, 'New Post', 'Very good');
+
+// $resultsafter = Posts::getPosts($conn);
 
 mysqli_close($conn);
 
@@ -29,13 +33,19 @@ mysqli_close($conn);
 <body>
     <?php
 
-    // while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        print('<pre>');
+        var_dump($row);
+        print('</pre>');
+    }
+
+    // print('<div style="color: red">New results</div>');
+
+    // while ($row = mysqli_fetch_assoc($resultsafter)) {
     //     print('<pre>');
     //     var_dump($row);
     //     print('</pre>');
     // }
-
-    print($result);
 
     ?>
 </body>

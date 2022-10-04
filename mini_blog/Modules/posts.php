@@ -1,5 +1,7 @@
 <?php
 
+//Possible to make the class itself make the connection and then close the connection with a destructor
+
 class Posts
 {
     public static function getPosts(mysqli $conn): mysqli_result
@@ -41,7 +43,7 @@ class Posts
         $row = mysqli_fetch_assoc($result);
         return $row['createdAt'];
     }
-    public static function createPost(mysqli $conn, string $title, string $content, string $image = null)
+    public static function createPost(mysqli $conn, string $title, string $content, string $image = null): void
     {
         $titleLengthOK = strlen($title) <= 255;
         $imageLengthOK = strlen($image) <= 255;
@@ -62,6 +64,32 @@ class Posts
         $sql = "INSERT INTO blog_database.posts (title, content, image) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sss', $title, $content, $image);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public static function updatePost(mysqli $conn, int $id, string $field, string $value): void
+    {
+
+        if ($field == 'title' || $field = 'image') {
+
+            $sql = "UPDATE blog_database.posts $field = ? WHERE id = $id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('s', $value);
+            $stmt->execute();
+            $stmt->close();
+        } elseif ($field == 'createdAt' || $field == 'id') {
+            throw new InvalidArgumentException("Blog post $field field cannot be changed.");
+        } else {
+            throw new InvalidArgumentException("Blog post field does not exist.");
+        }
+    }
+
+    public static function deletePost(mysqli $conn, int $id): void
+    {
+        $sql = "DELETE FROM blog_database.posts WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
         $stmt->close();
     }
