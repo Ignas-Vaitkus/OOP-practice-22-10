@@ -14,4 +14,4 @@ DROP USER IF EXISTS  'blog_user'@'localhost';
     
 CREATE USER 'blog_user'@'localhost' IDENTIFIED BY 'mysql';
 
-GRANT SELECT, DELETE, INSERT, UPDATE ON blog_database.posts TO 'crud_user'@'localhost';
+GRANT SELECT, DELETE, INSERT, UPDATE ON blog_database.posts TO 'blog_user'@'localhost';
